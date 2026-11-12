@@ -1,4 +1,4 @@
-# FinderPreset (Finder 프리셋)
+# FinderPreset
 
 **한국어** | [English](README.en.md)
 

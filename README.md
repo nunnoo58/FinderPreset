@@ -1,4 +1,4 @@
-# FindePreset
+# FinderPreset
 
 Finder 폴더 보기 설정을 프리셋으로 저장해 두고, Finder 우클릭 메뉴에서 바로 적용하는 macOS 앱이다.
 
@@ -28,7 +28,7 @@ Finder 폴더 보기 설정을 프리셋으로 저장해 두고, Finder 우클�
 
 ## 설치
 
-1. [Releases](https://github.com/nunnoo58/FindePreset/releases)에서 `FinderPresets-x.x.zip`을 받아 압축을 푼다.
+1. [Releases](https://github.com/nunnoo58/FinderPreset/releases)에서 `FinderPresets-x.x.zip`을 받아 압축을 푼다.
 2. `FinderPresets.app`을 `/응용 프로그램` 폴더로 옮긴다.
 3. 처음 실행할 때는 앱을 우클릭 → 열기로 연다. 자체 서명 앱이라 Gatekeeper 경고가 뜬다.
 4. 앱 상단에 확장이 꺼져 있다는 안내가 보이면 "확장 켜기"를 눌러 Finder 확장을 켠다.
@@ -78,8 +78,8 @@ macOS 15 이후 Finder는 AppleScript로 바꾼 정렬, 열 표시, 배경색을
 
 ```sh
 brew install xcodegen
-git clone https://github.com/nunnoo58/FindePreset.git
-cd FindePreset
+git clone https://github.com/nunnoo58/FinderPreset.git
+cd FinderPreset
 ```
 
 `project.yml`의 `CODE_SIGN_IDENTITY`를 자기 코드 서명 인증서 이름으로 바꾼다. 인증서 없이 빌드하려면 `CODE_SIGN_IDENTITY: "-"`(ad-hoc)로 바꾼다. 다만 ad-hoc 서명은 빌드할 때마다 권한을 다시 허용해야 한다.
@@ -92,7 +92,7 @@ cp -R build/Build/Products/Release/FinderPresets.app /Applications/
 
 ## 기여
 
-풀 리퀘스트는 받지 않는다. 버그나 제안은 [Issues](https://github.com/nunnoo58/FindePreset/issues)로 남긴다.
+풀 리퀘스트는 받지 않는다. 버그나 제안은 [Issues](https://github.com/nunnoo58/FinderPreset/issues)로 남긴다.
 
 ## 라이선스
 

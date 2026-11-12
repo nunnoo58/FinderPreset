@@ -1,0 +1,61 @@
+name: FinderPresets
+options:
+  bundleIdPrefix: com.nunnoo
+  deploymentTarget:
+    macOS: "15.0"
+settings:
+  base:
+    # 이 맥 로그인 키체인의 자체 서명 인증서. 서명이 고정되어 다시 빌드해도 손쉬운 사용·자동화 권한이 유지된다.
+    CODE_SIGN_STYLE: Manual
+    CODE_SIGN_IDENTITY: Finder Presets Self-Signed
+    SWIFT_VERSION: "5.0"
+    ENABLE_HARDENED_RUNTIME: YES
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+targets:
+  FinderPresets:
+    type: application
+    platform: macOS
+    sources: [App, Shared]
+    dependencies:
+      - target: FinderPresetsExtension
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: Finder 프리셋
+        LSApplicationCategoryType: public.app-category.utilities
+        NSAppleEventsUsageDescription: Finder 창의 보기 설정을 읽고 적용한다.
+        CFBundleURLTypes:
+          - CFBundleURLName: com.nunnoo.FinderPresets
+            CFBundleURLSchemes: [finderpresets]
+    entitlements:
+      path: App/FinderPresets.entitlements
+      properties:
+        com.apple.security.app-sandbox: true
+        com.apple.security.automation.apple-events: true
+        com.apple.security.temporary-exception.apple-events: [com.apple.finder, com.apple.systemevents]
+        com.apple.security.temporary-exception.files.home-relative-path.read-write: [/Library/Application Support/FinderPresets/]
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.nunnoo.FinderPresets
+  FinderPresetsExtension:
+    type: app-extension
+    platform: macOS
+    sources: [Extension, Shared]
+    info:
+      path: Extension/Info.plist
+      properties:
+        CFBundleDisplayName: Finder 프리셋
+        NSAppleEventsUsageDescription: Finder 창의 보기 설정을 읽고 적용한다.
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.FinderSync
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).FinderSync
+          NSExtensionAttributes: {}
+    entitlements:
+      path: Extension/FinderPresetsExtension.entitlements
+      properties:
+        com.apple.security.app-sandbox: true
+        com.apple.security.automation.apple-events: true
+        com.apple.security.temporary-exception.apple-events: [com.apple.finder, com.apple.systemevents]
+        com.apple.security.temporary-exception.files.home-relative-path.read-write: [/Library/Application Support/FinderPresets/]
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.nunnoo.FinderPresets.FinderSync

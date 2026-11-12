@@ -1,0 +1,443 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		268FC23AFC9B629470FDA635 /* Preset.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4D8B3A64C181AD0131B8F /* Preset.swift */; };
+		4314C9699382A3A9896703B5 /* FinderScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = C366F9CA402E046B259D93CC /* FinderScript.swift */; };
+		9FD320C86B6BBA09EB63EE72 /* Preset.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4D8B3A64C181AD0131B8F /* Preset.swift */; };
+		A82C467938B90FFEE328E47F /* FinderPresetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 83D882E96F1677DC8D8A2453 /* FinderPresetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		BB89CC527A28C148AA04FC73 /* FinderScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = C366F9CA402E046B259D93CC /* FinderScript.swift */; };
+		BF6C95AEC7AF87D05567A764 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCC70E4379689A73ED4689E /* ContentView.swift */; };
+		D0F87A2EAC43FBD58FDEAF2C /* FinderPresetsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9373C963BE06D93BBC953C5E /* FinderPresetsApp.swift */; };
+		FDD58650301BDF86C400F52F /* FinderSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D0F728021A91582DAAAD7 /* FinderSync.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B66B3C7AB35CDF33A1E7DD3B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 64C3F3C23D98E916BA871BDE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4DB0FF663D98BA506B06D38C;
+			remoteInfo = FinderPresetsExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A1E8237F66DF0A64BD5BBD9B /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				A82C467938B90FFEE328E47F /* FinderPresetsExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		034D0F728021A91582DAAAD7 /* FinderSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderSync.swift; sourceTree = "<group>"; };
+		55579A4A1513B309B794AB40 /* FinderPresets.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FinderPresets.entitlements; sourceTree = "<group>"; };
+		83D882E96F1677DC8D8A2453 /* FinderPresetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FinderPresetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E947F16A8960BA8D36BA993 /* FinderPresets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinderPresets.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9373C963BE06D93BBC953C5E /* FinderPresetsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderPresetsApp.swift; sourceTree = "<group>"; };
+		BA3DCCE3ADD8E544295F4411 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		BCCC70E4379689A73ED4689E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		C366F9CA402E046B259D93CC /* FinderScript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderScript.swift; sourceTree = "<group>"; };
+		C562AB6D619273B33765424F /* FinderPresetsExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FinderPresetsExtension.entitlements; sourceTree = "<group>"; };
+		CDA4D8B3A64C181AD0131B8F /* Preset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preset.swift; sourceTree = "<group>"; };
+		E74C7CE7A030F255EB5C829F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		68817DCEB1E4FFAAAE2CA454 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				C562AB6D619273B33765424F /* FinderPresetsExtension.entitlements */,
+				034D0F728021A91582DAAAD7 /* FinderSync.swift */,
+				E74C7CE7A030F255EB5C829F /* Info.plist */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		81467BB6E8FCFBBFB98364F5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8E947F16A8960BA8D36BA993 /* FinderPresets.app */,
+				83D882E96F1677DC8D8A2453 /* FinderPresetsExtension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		89486076C9A21CB82A4A5D67 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				BCCC70E4379689A73ED4689E /* ContentView.swift */,
+				55579A4A1513B309B794AB40 /* FinderPresets.entitlements */,
+				9373C963BE06D93BBC953C5E /* FinderPresetsApp.swift */,
+				BA3DCCE3ADD8E544295F4411 /* Info.plist */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		A53F6A9DF791059C3B0AC12E /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				C366F9CA402E046B259D93CC /* FinderScript.swift */,
+				CDA4D8B3A64C181AD0131B8F /* Preset.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		BD6894501AB8834BED192DE2 = {
+			isa = PBXGroup;
+			children = (
+				89486076C9A21CB82A4A5D67 /* App */,
+				68817DCEB1E4FFAAAE2CA454 /* Extension */,
+				A53F6A9DF791059C3B0AC12E /* Shared */,
+				81467BB6E8FCFBBFB98364F5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4DB0FF663D98BA506B06D38C /* FinderPresetsExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B0D637C5D9CAC8F426010C9B /* Build configuration list for PBXNativeTarget "FinderPresetsExtension" */;
+			buildPhases = (
+				098FD5C76A9AB2459BE88C53 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FinderPresetsExtension;
+			packageProductDependencies = (
+			);
+			productName = FinderPresetsExtension;
+			productReference = 83D882E96F1677DC8D8A2453 /* FinderPresetsExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		EE0887BC64A5B619EDBACBEB /* FinderPresets */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0FD46E6C6E54B05AC186E277 /* Build configuration list for PBXNativeTarget "FinderPresets" */;
+			buildPhases = (
+				0664965A0D19DDDEA22788A1 /* Sources */,
+				A1E8237F66DF0A64BD5BBD9B /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9A5337229C5B0488D83E00F6 /* PBXTargetDependency */,
+			);
+			name = FinderPresets;
+			packageProductDependencies = (
+			);
+			productName = FinderPresets;
+			productReference = 8E947F16A8960BA8D36BA993 /* FinderPresets.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		64C3F3C23D98E916BA871BDE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					4DB0FF663D98BA506B06D38C = {
+						ProvisioningStyle = Manual;
+					};
+					EE0887BC64A5B619EDBACBEB = {
+						ProvisioningStyle = Manual;
+					};
+				};
+			};
+			buildConfigurationList = F8A5BA3CBAC070E47CB5A195 /* Build configuration list for PBXProject "FinderPresets" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = BD6894501AB8834BED192DE2;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 81467BB6E8FCFBBFB98364F5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EE0887BC64A5B619EDBACBEB /* FinderPresets */,
+				4DB0FF663D98BA506B06D38C /* FinderPresetsExtension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0664965A0D19DDDEA22788A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF6C95AEC7AF87D05567A764 /* ContentView.swift in Sources */,
+				D0F87A2EAC43FBD58FDEAF2C /* FinderPresetsApp.swift in Sources */,
+				4314C9699382A3A9896703B5 /* FinderScript.swift in Sources */,
+				9FD320C86B6BBA09EB63EE72 /* Preset.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		098FD5C76A9AB2459BE88C53 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB89CC527A28C148AA04FC73 /* FinderScript.swift in Sources */,
+				FDD58650301BDF86C400F52F /* FinderSync.swift in Sources */,
+				268FC23AFC9B629470FDA635 /* Preset.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9A5337229C5B0488D83E00F6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4DB0FF663D98BA506B06D38C /* FinderPresetsExtension */;
+			targetProxy = B66B3C7AB35CDF33A1E7DD3B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		13BABF8726E505E0D5D5FC3C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Extension/FinderPresetsExtension.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Extension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nunnoo.FinderPresets.FinderSync;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		2548A6CE05D4992F13F96C03 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Finder Presets Self-Signed";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		7A8A49E0832E91D741250835 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = App/FinderPresets.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = App/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nunnoo.FinderPresets;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		8BB2E12817D9B1EF87EDE3CB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = App/FinderPresets.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = App/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nunnoo.FinderPresets;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		B0A531BD03E69B1B8A2240C8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Extension/FinderPresetsExtension.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Extension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nunnoo.FinderPresets.FinderSync;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		F2269D64496CAA2782E16AFF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Finder Presets Self-Signed";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0FD46E6C6E54B05AC186E277 /* Build configuration list for PBXNativeTarget "FinderPresets" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7A8A49E0832E91D741250835 /* Debug */,
+				8BB2E12817D9B1EF87EDE3CB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		B0D637C5D9CAC8F426010C9B /* Build configuration list for PBXNativeTarget "FinderPresetsExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B0A531BD03E69B1B8A2240C8 /* Debug */,
+				13BABF8726E505E0D5D5FC3C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F8A5BA3CBAC070E47CB5A195 /* Build configuration list for PBXProject "FinderPresets" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2548A6CE05D4992F13F96C03 /* Debug */,
+				F2269D64496CAA2782E16AFF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 64C3F3C23D98E916BA871BDE /* Project object */;
+}

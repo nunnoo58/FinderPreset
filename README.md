@@ -1,7 +1,5 @@
 # FinderPreset
 
-**한국어** | [English](README.en.md)
-
 > 이 앱은 Anthropic의 AI 어시스턴트인 Claude를 이용해 만들었습니다. 코드 작성, 빌드, 문서화를 Claude와 함께 진행했습니다.
 
 Finder 폴더의 보기 설정을 프리셋으로 저장해 두고, Finder 우클릭 메뉴에서 바로 적용하는 macOS 앱입니다. 설정은 폴더마다 따로 저장되어 다른 폴더에 영향을 주지 않습니다.

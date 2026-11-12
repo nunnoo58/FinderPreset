@@ -1,7 +1,5 @@
 # 변경 내역
 
-**한국어** | [English](CHANGELOG.en.md)
-
 각 버전의 앱은 [Releases](https://github.com/nunnoo58/FinderPreset/releases)에서 받을 수 있습니다.
 
 ## v1.0 (2026-11-12)

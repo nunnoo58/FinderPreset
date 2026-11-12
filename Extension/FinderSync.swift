@@ -107,7 +107,7 @@ final class FinderSync: FIFinderSync {
         onMain {
             let alert = NSAlert()
             alert.messageText = "현재 보기를 프리셋으로 저장"
-            alert.informativeText = "프리셋 이름을 입력한다."
+            alert.informativeText = "프리셋 이름을 입력하세요."
             alert.addButton(withTitle: "저장")
             alert.addButton(withTitle: "취소")
             let field = NSTextField(frame: NSRect(x: 0, y: 0, width: 260, height: 24))
@@ -124,8 +124,8 @@ final class FinderSync: FIFinderSync {
     private static func confirm(count: Int) -> Bool {
         onMain {
             let alert = NSAlert()
-            alert.messageText = "폴더 \(count)개에 적용한다"
-            alert.informativeText = "폴더마다 창을 열어 적용해 약 \(max(1, count * 3 / 60))분 걸린다. 그동안 Finder를 조작하지 않아야 한다."
+            alert.messageText = "폴더 \(count)개에 적용할까요?"
+            alert.informativeText = "폴더마다 창을 열어 적용하므로 약 \(max(1, count * 3 / 60))분 걸립니다. 그동안 Finder를 조작하지 마세요."
             alert.addButton(withTitle: "적용")
             alert.addButton(withTitle: "취소")
             NSApp.activate(ignoringOtherApps: true)

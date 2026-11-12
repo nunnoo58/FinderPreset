@@ -19,7 +19,7 @@ enum FinderScript {
         let result = run(helpers + readHandler + call)
         if let error = result.error { return .failure(ScriptError(message: error)) }
         guard let d = result.descriptor, d.numberOfItems >= 17 else {
-            return .failure(ScriptError(message: "Finder 창 설정을 읽지 못했다."))
+            return .failure(ScriptError(message: "Finder 창 설정을 읽지 못했습니다."))
         }
         func string(_ i: Int) -> String { d.atIndex(i)?.stringValue ?? "" }
         func int(_ i: Int) -> Int { Int(d.atIndex(i)?.int32Value ?? 0) }
@@ -264,7 +264,7 @@ enum FinderScript {
 
     private static func run(_ source: String) -> (descriptor: NSAppleEventDescriptor?, error: String?) {
         var info: NSDictionary?
-        guard let script = NSAppleScript(source: source) else { return (nil, "스크립트를 만들지 못했다.") }
+        guard let script = NSAppleScript(source: source) else { return (nil, "스크립트를 만들지 못했습니다.") }
         let result = script.executeAndReturnError(&info)
         if let info { return (nil, info[NSAppleScript.errorMessage] as? String ?? "\(info)") }
         return (result, nil)

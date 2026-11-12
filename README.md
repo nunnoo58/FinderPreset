@@ -8,15 +8,11 @@ Finder 폴더의 보기 설정을 프리셋으로 저장해 두고, Finder 우�
 - 테스트 완료: MacBook Pro 14 (M5, macOS 27.2)
 - Apple의 인증(공증)을 받지 않은 앱이라 처음 실행할 때 경고가 뜹니다. [처음 실행](#2-처음-실행)을 참고해 주세요.
 
-## 최신 버전: v1.0
+## 최신 버전: v1.0.1
 
-- 첫 공개 버전
-- 우클릭 → 보기 프리셋에서 프리셋을 골라 폴더에 바로 적용
-- 하위 폴더까지 적용 (지금 있는 하위 폴더에 한 번만 적용)
-- 현재 보기를 프리셋으로 저장
-- 앱 창에서 프리셋 추가, 편집, 삭제, 순서 변경
+- 앱 안의 안내 문구, 확인 창, 오류 메시지를 경어로 변경
 
-변경 내역은 [CHANGELOG.md](CHANGELOG.md), 앱은 [최신 릴리스](https://github.com/nunnoo58/FinderPreset/releases/latest)에서 볼 수 있습니다.
+이전 버전의 변경 내역은 [CHANGELOG.md](CHANGELOG.md), 앱은 [최신 릴리스](https://github.com/nunnoo58/FinderPreset/releases/latest)에서 볼 수 있습니다.
 
 ## 만든 이유
 
@@ -72,7 +68,7 @@ xattr -dr com.apple.quarantine /Applications/FinderPresets.app
 
 ### 3. Finder 확장 켜기
 
-앱 창 위쪽에 "Finder 확장이 꺼져 있어 우클릭 메뉴에 나타나지 않는다"라는 안내가 보이면 **확장 켜기**를 눌러 "Finder 프리셋"을 켭니다. 안내가 사라지면 Finder 우클릭 메뉴에 **보기 프리셋**이 나타납니다.
+앱 창 위쪽에 "Finder 확장이 꺼져 있어 우클릭 메뉴에 나타나지 않습니다"라는 안내가 보이면 **확장 켜기**를 눌러 "Finder 프리셋"을 켭니다. 안내가 사라지면 Finder 우클릭 메뉴에 **보기 프리셋**이 나타납니다.
 
 ### 4. 권한 허용
 

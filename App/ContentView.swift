@@ -22,7 +22,7 @@ struct ContentView: View {
                         selection = preset.id
                     }
                     Button("현재 Finder 창에서 새 프리셋", systemImage: "square.and.arrow.down.on.square") { readNew() }
-                        .help("맨 앞 Finder 창의 보기 설정으로 새 프리셋을 만든다")
+                        .help("맨 앞 Finder 창의 보기 설정으로 새 프리셋을 만듭니다")
                         .disabled(busy)
                     Button("삭제", systemImage: "minus") {
                         presets.removeAll { $0.id == selection }
@@ -40,7 +40,7 @@ struct ContentView: View {
             VStack(spacing: 0) {
                 if !extensionEnabled {
                     HStack {
-                        Text("Finder 확장이 꺼져 있어 우클릭 메뉴에 나타나지 않는다.")
+                        Text("Finder 확장이 꺼져 있어 우클릭 메뉴에 나타나지 않습니다.")
                         Spacer()
                         Button("확장 켜기") { FIFinderSyncController.showExtensionManagementInterface() }
                     }
@@ -51,9 +51,9 @@ struct ContentView: View {
                     PresetEditor(preset: $presets[i])
                         .toolbar {
                             Button("현재 창에서 가져오기", systemImage: "square.and.arrow.down") { read(into: i) }
-                                .help("맨 앞 Finder 창의 보기 설정을 이 프리셋에 덮어쓴다")
+                                .help("맨 앞 Finder 창의 보기 설정을 이 프리셋에 덮어씁니다")
                             Button("현재 창에 적용", systemImage: "play") { apply(presets[i]) }
-                                .help("맨 앞 Finder 창에 이 프리셋을 적용한다")
+                                .help("맨 앞 Finder 창에 이 프리셋을 적용합니다")
                         }
                         .disabled(busy)
                 } else {
@@ -132,7 +132,7 @@ struct PresetEditor: View {
                 Picker("정렬 기준", selection: $preset.sortKey) {
                     ForEach(SortKey.allCases) { Text($0.title).tag($0) }
                 }
-                .help("정렬 방향은 Finder 기본값을 따른다. 없음·자동 격자 정렬은 아이콘 보기에서만 적용된다.")
+                .help("정렬 방향은 Finder 기본값을 따릅니다. 없음·자동 격자 정렬은 아이콘 보기에서만 적용됩니다.")
             }
 
             Section("아이콘 보기") {

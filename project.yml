@@ -10,8 +10,8 @@ settings:
     CODE_SIGN_IDENTITY: Finder Presets Self-Signed
     SWIFT_VERSION: "5.0"
     ENABLE_HARDENED_RUNTIME: YES
-    MARKETING_VERSION: "1.0"
-    CURRENT_PROJECT_VERSION: "1"
+    MARKETING_VERSION: "1.0.1"
+    CURRENT_PROJECT_VERSION: "2"
 targets:
   FinderPresets:
     type: application
@@ -23,8 +23,10 @@ targets:
       path: App/Info.plist
       properties:
         CFBundleDisplayName: Finder 프리셋
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         LSApplicationCategoryType: public.app-category.utilities
-        NSAppleEventsUsageDescription: Finder 창의 보기 설정을 읽고 적용한다.
+        NSAppleEventsUsageDescription: Finder 창의 보기 설정을 읽고 적용합니다.
         CFBundleURLTypes:
           - CFBundleURLName: com.nunnoo.FinderPresets
             CFBundleURLSchemes: [finderpresets]
@@ -45,7 +47,9 @@ targets:
       path: Extension/Info.plist
       properties:
         CFBundleDisplayName: Finder 프리셋
-        NSAppleEventsUsageDescription: Finder 창의 보기 설정을 읽고 적용한다.
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        NSAppleEventsUsageDescription: Finder 창의 보기 설정을 읽고 적용합니다.
         NSExtension:
           NSExtensionPointIdentifier: com.apple.FinderSync
           NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).FinderSync

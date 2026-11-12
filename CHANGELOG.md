@@ -2,6 +2,10 @@
 
 각 버전의 앱은 [Releases](https://github.com/nunnoo58/FinderPreset/releases)에서 받을 수 있습니다.
 
+## v1.0.1 (2026-11-12)
+
+- 앱 안의 안내 문구, 확인 창, 오류 메시지를 경어로 변경
+
 ## v1.0 (2026-11-12)
 
 - 첫 공개 버전

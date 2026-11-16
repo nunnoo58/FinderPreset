@@ -41,7 +41,6 @@ final class FinderSync: FIFinderSync {
         submenu.addItem(NSMenuItem(title: L("프리셋 편집…", "Edit Presets…"), action: #selector(openEditor(_:)), keyEquivalent: ""))
 
         let root = NSMenuItem(title: L("보기 프리셋", "View Presets"), action: nil, keyEquivalent: "")
-        root.image = NSImage(systemSymbolName: "rectangle.grid.2x2", accessibilityDescription: nil)
         root.submenu = submenu
         let menu = NSMenu()
         menu.addItem(root)
@@ -73,8 +72,10 @@ final class FinderSync: FIFinderSync {
         send("save", [URLQueryItem(name: "path", value: path)], activates: true)
     }
 
+    // 요청으로 실행되면 앱이 창을 닫으므로, 편집은 Dock에서 여는 것처럼 앱을 실행한다
     @objc private func openEditor(_ sender: NSMenuItem) {
-        send("edit", [], activates: true)
+        let app = Bundle.main.bundleURL.deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+        NSWorkspace.shared.openApplication(at: app, configuration: NSWorkspace.OpenConfiguration())
     }
 
     private func send(_ action: String, _ items: [URLQueryItem], activates: Bool = false) {

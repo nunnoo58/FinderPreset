@@ -63,7 +63,12 @@ struct ContentView: View {
             }
         }
         .onChange(of: presets) { PresetStore.save(presets) }
-        .onAppear { AppDelegate.openMainWindow = { openWindow(id: "main") } }
+        .onAppear {
+            AppDelegate.openMainWindow = { openWindow(id: "main") }
+            if AppDelegate.hidingForRequest {
+                DispatchQueue.main.async { AppDelegate.closeMainWindows() }
+            }
+        }
         // 우클릭으로 저장한 프리셋을 목록에 바로 반영한다
         .onReceive(NotificationCenter.default.publisher(for: .presetsChanged)) { _ in
             presets = PresetStore.load()

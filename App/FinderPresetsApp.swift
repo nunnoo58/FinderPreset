@@ -5,6 +5,8 @@ struct FinderPresetsApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
 
     init() {
+        // 지난번 창을 복원하면 요청 처리용으로 실행될 때도 창이 나타나서 끈다
+        UserDefaults.standard.register(defaults: ["NSQuitAlwaysKeepsWindows": false])
         Self.applyLanguageToSystemUI()
     }
 

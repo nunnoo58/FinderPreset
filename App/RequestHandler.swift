@@ -9,16 +9,23 @@ extension Notification.Name {
 final class AppDelegate: NSObject, NSApplicationDelegate {
     /// ContentView가 나타날 때 SwiftUI의 openWindow를 넘겨준다
     static var openMainWindow: (() -> Void)?
+    /// 요청 처리용으로 실행된 동안에는 창을 보이지 않는다. 창이 요청보다 늦게 만들어지면 ContentView가 이 값을 보고 닫는다.
+    static var hidingForRequest = false
 
     private var launchedForRequest = false
     private var pending = 0
+    private let launchedAt = Date()
 
-    func applicationDidFinishLaunching(_ notification: Notification) {
-        // 요청 때문에 실행됐으면 창을 띄우지 않고, 처리가 끝나면 종료한다
-        let isDefaultLaunch = notification.userInfo?["NSApplicationLaunchIsDefaultLaunchKey"] as? Bool ?? true
-        if !isDefaultLaunch {
-            launchedForRequest = true
-            NSApp.windows.forEach { $0.orderOut(nil) }
+    /// 실행 직후에 들어온 적용·저장 요청이면 요청 때문에 실행된 것으로 보고, 창을 띄우지 않고 처리가 끝나면 종료한다.
+    /// "프리셋 편집…"이나 Dock으로 실행되면 요청이 오지 않아 창이 그대로 뜬다.
+    private func beginRequestOnlyModeIfJustLaunched() {
+        guard !launchedForRequest, Date().timeIntervalSince(launchedAt) < 3 else { return }
+        launchedForRequest = true
+        Self.hidingForRequest = true
+        // SwiftUI가 만드는 창은 요청을 받은 뒤에 나타날 수 있어, 나타날 때마다 닫는다
+        NotificationCenter.default.addObserver(forName: NSApplication.didUpdateNotification, object: nil, queue: .main) { _ in
+            guard Self.hidingForRequest else { return }
+            if NSApp.windows.contains(where: { $0.canBecomeMain && $0.isVisible }) { Self.closeMainWindows() }
         }
     }
 
@@ -26,6 +33,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     // 요청 때문에 실행된 경우에는 처리가 끝난 뒤 직접 종료한다.
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         false
+    }
+
+    // 요청 처리용으로 실행된 앱을 Dock 아이콘이나 "프리셋 편집…"으로 다시 열면 창을 띄우고, 처리가 끝나도 종료하지 않는다
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        // 대화 상자를 띄우려고 앱을 앞으로 가져올 때도 다시 열기가 와서, 요청을 처리하는 동안에는 창을 열지 않는다
+        if pending > 0 { return false }
+        if !flag { showMainWindow() }
+        return true
     }
 
     func application(_ application: NSApplication, open urls: [URL]) {
@@ -80,6 +95,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func run(_ work: @escaping () -> Void) {
+        beginRequestOnlyModeIfJustLaunched()
+        if launchedForRequest { Self.closeMainWindows() }
         pending += 1
         FinderScript.queue.async {
             work()
@@ -90,13 +107,21 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
+    // 숨기기(orderOut)만 하면 앱을 앞으로 가져올 때 다시 나타나서 닫는다. 앱은 마지막 창이 닫혀도 종료하지 않는다.
+    static func closeMainWindows() {
+        NSApp.windows.filter(\.canBecomeMain).forEach { $0.close() }
+    }
+
     private func showMainWindow() {
         launchedForRequest = false
+        Self.hidingForRequest = false
         NSApp.activate(ignoringOtherApps: true)
-        if let open = Self.openMainWindow {
-            open()
+        // 창이 남아 있으면 앞으로 가져오고, 닫혔으면 SwiftUI로 다시 연다
+        let windows = NSApp.windows.filter(\.canBecomeMain)
+        if windows.isEmpty {
+            Self.openMainWindow?()
         } else {
-            NSApp.windows.filter(\.canBecomeMain).forEach { $0.makeKeyAndOrderFront(nil) }
+            windows.forEach { $0.makeKeyAndOrderFront(nil) }
         }
     }
 }

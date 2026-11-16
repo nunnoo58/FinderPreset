@@ -1,3 +1,4 @@
+import ApplicationServices
 import Foundation
 
 enum FinderScript {
@@ -6,6 +7,7 @@ enum FinderScript {
 
     /// paths가 비어 있으면 맨 앞 Finder 창에 적용한다. 파일 경로는 그 파일이 든 폴더로 바꿔 적용한다.
     static func apply(_ preset: Preset, to paths: [String]) -> String? {
+        if let error = requireAccessibility() { return error }
         let calls = paths.isEmpty
             ? [frontTarget, "applyPreset(t)"]
             : paths.map { "applyPreset((POSIX file \(quoted($0))) as alias)" }
@@ -14,12 +16,13 @@ enum FinderScript {
 
     /// path 폴더(nil이면 맨 앞 Finder 창)의 보기 설정을 읽어 그 폴더 이름을 붙인 새 프리셋으로 돌려준다.
     static func read(path: String?) -> Result<Preset, ScriptError> {
+        if let error = requireAccessibility() { return .failure(ScriptError(message: error)) }
         let call = path.map { "return readPreset((POSIX file \(quoted($0))) as alias)" }
             ?? frontTarget + "\nreturn readPreset(t)"
         let result = run(helpers + readHandler + call)
         if let error = result.error { return .failure(ScriptError(message: error)) }
         guard let d = result.descriptor, d.numberOfItems >= 17 else {
-            return .failure(ScriptError(message: "Finder 창 설정을 읽지 못했습니다."))
+            return .failure(ScriptError(message: L("Finder 창 설정을 읽지 못했습니다.", "Couldn't read the Finder window settings.")))
         }
         func string(_ i: Int) -> String { d.atIndex(i)?.stringValue ?? "" }
         func int(_ i: Int) -> Int { Int(d.atIndex(i)?.int32Value ?? 0) }
@@ -27,7 +30,7 @@ enum FinderScript {
 
         var p = Preset(name: string(1))
         p.viewStyle = ViewStyle(rawValue: string(2)) ?? p.viewStyle
-        p.sortKey = SortKey.allCases.first { $0.title == string(3) } ?? p.sortKey
+        p.sortKey = SortKey.allCases.first { $0.menuNames.contains(string(3)) } ?? p.sortKey
         p.iconSize = int(4)
         p.iconTextSize = int(5)
         p.labelOnRight = bool(6)
@@ -80,6 +83,15 @@ enum FinderScript {
         return .success(found)
     }
 
+    /// Finder 메뉴를 누르려면 앱에 손쉬운 사용 권한(macOS 27부터 "기기 제어 및 데이터 접근")이 있어야 한다.
+    /// 없으면 macOS 권한 요청 창을 띄운다.
+    private static func requireAccessibility() -> String? {
+        let options = [kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String: true] as CFDictionary
+        if AXIsProcessTrustedWithOptions(options) { return nil }
+        return L("Finder를 조작할 권한이 필요합니다. 시스템 설정 → 개인정보 보호 및 보안 → 기기 제어 및 데이터 접근(이전 macOS에서는 손쉬운 사용)에서 FinderPresets를 켠 뒤 다시 시도하세요.",
+                 "Permission to control Finder is required. Turn on FinderPresets in System Settings → Privacy & Security → Device Control and Data Access (Accessibility on earlier macOS), then try again.")
+    }
+
     struct ScriptError: Error {
         let message: String
     }
@@ -88,7 +100,8 @@ enum FinderScript {
 
     private static let frontTarget = "tell application \"Finder\" to set t to (target of Finder window 1) as alias"
 
-    private static let helpers = """
+    // 오류 문구가 그때의 앱 언어를 따르도록 매번 만든다
+    private static var helpers: String { """
     on folderOf(t)
         tell application "Finder"
             if class of item (t as text) is not in {folder, disk} then set t to (container of item (t as text)) as alias
@@ -115,30 +128,65 @@ enum FinderScript {
         end tell
     end windowFor
 
-    -- 보기 메뉴는 맨 앞 창에 적용되므로 대상 창을 앞으로 가져온다
+    -- 메뉴 막대 순서(Apple, Finder, 파일, 편집, 보기)는 macOS 언어와 관계없다
+    on viewMenu()
+        tell application "System Events" to tell process "Finder"
+            return menu 1 of menu bar item 5 of menu bar 1
+        end tell
+    end viewMenu
+
+    -- 보기 메뉴는 맨 앞 창에 적용되므로 대상 창을 앞으로 가져온다.
+    -- 그룹을 쓰는 폴더에서는 정렬 메뉴 이름이 "다음으로 그룹 정렬"로 바뀐다.
     on sortMenu(cw)
         tell application "Finder"
             activate
             set index of cw to 1
         end tell
         delay 0.3
-        tell application "System Events" to tell process "Finder"
-            return menu 1 of menu item "다음으로 정렬" of menu 1 of menu bar item "보기" of menu bar 1
+        set vm to viewMenu()
+        tell application "System Events"
+            repeat with n in {"다음으로 정렬", "Sort By", "다음으로 그룹 정렬", "Sort Groups By"}
+                if exists menu item (contents of n) of vm then return menu 1 of menu item (contents of n) of vm
+            end repeat
         end tell
+        error "\(L("Finder 보기 메뉴에서 정렬 항목을 찾지 못했습니다. macOS 언어가 한국어나 영어인지 확인하세요.", "Couldn't find Sort By in Finder's View menu. Make sure the macOS language is Korean or English."))"
     end sortMenu
+
+    on clickFirst(m, names)
+        tell application "System Events"
+            repeat with n in names
+                if exists menu item (contents of n) of m then
+                    click menu item (contents of n) of m
+                    return
+                end if
+            end repeat
+        end tell
+    end clickFirst
 
     -- 보기 옵션의 "항상 ○○ 보기로 열기"가 꺼진 폴더는 보기 방식과 정렬을 기억하지 않고
     -- 마지막에 쓴 보기를 따라가므로 켠다. AppleScript로는 바꿀 수 없어 보기 옵션 창을 직접 다룬다.
     -- 목록 보기에서 정렬한 열이 숨겨져 있으면 다시 열 때 이름순으로 돌아가므로 그 열도 켠다.
     -- 대상 창이 맨 앞에 있어야 한다. "항상 ○○ 보기로 열기"를 이번에 켰는지를 돌려준다.
-    on keepPerFolder(sortTitle)
+    on keepPerFolder(sortNames)
+        set vm to viewMenu()
         tell application "System Events" to tell process "Finder"
-            if not (exists (first window whose subrole is "AXSystemFloatingWindow")) then
-                click menu item "보기 옵션" of menu 1 of menu bar item "보기" of menu bar 1
+            -- "보기 옵션" 항목은 언어와 관계없이 단축키 ⌘J로 찾는다. Finder가 보기 옵션을 이미 연 것으로 여겨
+            -- 누르면 오히려 닫히는 경우가 있어, 창이 보일 때까지 최대 두 번 누른다.
+            repeat 2 times
+                if exists (first window whose subrole is "AXSystemFloatingWindow") then exit repeat
+                repeat with mi in menu items of vm
+                    try
+                        if value of attribute "AXMenuItemCmdChar" of mi is "J" then
+                            click mi
+                            exit repeat
+                        end if
+                    end try
+                end repeat
                 delay 0.5
-            end if
+            end repeat
             set panel to first window whose subrole is "AXSystemFloatingWindow"
-            set box to first checkbox of panel whose name starts with "항상"
+            -- 보기 방식과 관계없이 첫 체크박스가 "항상 ○○ 보기로 열기"다
+            set box to checkbox 1 of panel
             set toggled to (value of box is 0)
             if toggled then click box
             -- 열 체크박스는 그룹 안에 있어 전체를 뒤진다
@@ -147,7 +195,7 @@ enum FinderScript {
                 -- 창 내용이 바뀌는 중이면 사라진 요소를 만나 오류가 나므로 건너뛴다
                 try
                     set el to item i of els
-                    if role of el is "AXCheckBox" and name of el is sortTitle then
+                    if role of el is "AXCheckBox" and sortNames contains (name of el) then
                         if value of el is 0 then click el
                         exit repeat
                     end if
@@ -167,9 +215,10 @@ enum FinderScript {
     end finish
 
 
-    """
+    """ }
 
     private static func applyHandler(_ p: Preset) -> String {
+        let sortNames = "{" + p.sortKey.menuNames.map(quoted).joined(separator: ", ") + "}"
         let options = """
             tell application "Finder"
                 tell list view options of cw
@@ -204,11 +253,9 @@ enum FinderScript {
             end tell
             set m to sortMenu(cw)
             -- 정렬할 열이 켜져 있어야 정렬이 저장되므로 보기 옵션을 정렬보다 먼저 다룬다
-            set toggled to keepPerFolder("\(p.sortKey.title)")
-            tell application "System Events"
-                -- 없음·자동 격자 정렬은 아이콘 보기에만 있어 다른 보기에서는 건너뛴다
-                if exists menu item "\(p.sortKey.title)" of m then click menu item "\(p.sortKey.title)" of m
-            end tell
+            set toggled to keepPerFolder(\(sortNames))
+            -- 없음·자동 격자 정렬은 아이콘 보기에만 있어 다른 보기에서는 건너뛴다
+            clickFirst(m, \(sortNames))
             -- 메뉴 정렬이 그 전에 AppleScript로 바꾼 값을 되돌리는 경우가 있어 값은 정렬 뒤에 넣는다
             \(options)
             finish(cw, openedHere)
@@ -264,7 +311,7 @@ enum FinderScript {
 
     private static func run(_ source: String) -> (descriptor: NSAppleEventDescriptor?, error: String?) {
         var info: NSDictionary?
-        guard let script = NSAppleScript(source: source) else { return (nil, "스크립트를 만들지 못했습니다.") }
+        guard let script = NSAppleScript(source: source) else { return (nil, L("스크립트를 만들지 못했습니다.", "Couldn't create the script.")) }
         let result = script.executeAndReturnError(&info)
         if let info { return (nil, info[NSAppleScript.errorMessage] as? String ?? "\(info)") }
         return (result, nil)

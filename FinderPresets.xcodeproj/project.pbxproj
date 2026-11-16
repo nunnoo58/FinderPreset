@@ -9,11 +9,16 @@
 /* Begin PBXBuildFile section */
 		268FC23AFC9B629470FDA635 /* Preset.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4D8B3A64C181AD0131B8F /* Preset.swift */; };
 		4314C9699382A3A9896703B5 /* FinderScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = C366F9CA402E046B259D93CC /* FinderScript.swift */; };
+		53B7D79E8543803A01A98E64 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BBC52EFF6FAA90AA0E88BD1B /* InfoPlist.strings */; };
 		9FD320C86B6BBA09EB63EE72 /* Preset.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA4D8B3A64C181AD0131B8F /* Preset.swift */; };
 		A82C467938B90FFEE328E47F /* FinderPresetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 83D882E96F1677DC8D8A2453 /* FinderPresetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AA8F4874E25D0B8D7786DFC2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 310CC46DC2F79984496657EE /* InfoPlist.strings */; };
+		B9640349E95BF7FF79793891 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC9EAA5EF0EEB56129A482A /* AppSettings.swift */; };
 		BB89CC527A28C148AA04FC73 /* FinderScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = C366F9CA402E046B259D93CC /* FinderScript.swift */; };
 		BF6C95AEC7AF87D05567A764 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCCC70E4379689A73ED4689E /* ContentView.swift */; };
 		D0F87A2EAC43FBD58FDEAF2C /* FinderPresetsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9373C963BE06D93BBC953C5E /* FinderPresetsApp.swift */; };
+		DDD370CF9DDCD0F260585E97 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC9EAA5EF0EEB56129A482A /* AppSettings.swift */; };
+		F509EFFE331E496A6EF9BDAA /* RequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8101B2500ADFA5EEFE55E806 /* RequestHandler.swift */; };
 		FDD58650301BDF86C400F52F /* FinderSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034D0F728021A91582DAAAD7 /* FinderSync.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,7 +48,10 @@
 
 /* Begin PBXFileReference section */
 		034D0F728021A91582DAAAD7 /* FinderSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderSync.swift; sourceTree = "<group>"; };
+		2FC9EAA5EF0EEB56129A482A /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		34AFE1A6666A61618562539D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		55579A4A1513B309B794AB40 /* FinderPresets.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FinderPresets.entitlements; sourceTree = "<group>"; };
+		8101B2500ADFA5EEFE55E806 /* RequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestHandler.swift; sourceTree = "<group>"; };
 		83D882E96F1677DC8D8A2453 /* FinderPresetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FinderPresetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E947F16A8960BA8D36BA993 /* FinderPresets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinderPresets.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9373C963BE06D93BBC953C5E /* FinderPresetsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderPresetsApp.swift; sourceTree = "<group>"; };
@@ -51,8 +59,11 @@
 		BCCC70E4379689A73ED4689E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C366F9CA402E046B259D93CC /* FinderScript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderScript.swift; sourceTree = "<group>"; };
 		C562AB6D619273B33765424F /* FinderPresetsExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FinderPresetsExtension.entitlements; sourceTree = "<group>"; };
+		CA3F4A1411951C577ED9FD2D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CDA4D8B3A64C181AD0131B8F /* Preset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preset.swift; sourceTree = "<group>"; };
+		D101B64FD1996D9D0ED406FE /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E74C7CE7A030F255EB5C829F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		F2EA049EB401CDE95E339282 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -62,6 +73,7 @@
 				C562AB6D619273B33765424F /* FinderPresetsExtension.entitlements */,
 				034D0F728021A91582DAAAD7 /* FinderSync.swift */,
 				E74C7CE7A030F255EB5C829F /* Info.plist */,
+				310CC46DC2F79984496657EE /* InfoPlist.strings */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -82,6 +94,8 @@
 				55579A4A1513B309B794AB40 /* FinderPresets.entitlements */,
 				9373C963BE06D93BBC953C5E /* FinderPresetsApp.swift */,
 				BA3DCCE3ADD8E544295F4411 /* Info.plist */,
+				8101B2500ADFA5EEFE55E806 /* RequestHandler.swift */,
+				BBC52EFF6FAA90AA0E88BD1B /* InfoPlist.strings */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -89,6 +103,7 @@
 		A53F6A9DF791059C3B0AC12E /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				2FC9EAA5EF0EEB56129A482A /* AppSettings.swift */,
 				C366F9CA402E046B259D93CC /* FinderScript.swift */,
 				CDA4D8B3A64C181AD0131B8F /* Preset.swift */,
 			);
@@ -113,6 +128,7 @@
 			buildConfigurationList = B0D637C5D9CAC8F426010C9B /* Build configuration list for PBXNativeTarget "FinderPresetsExtension" */;
 			buildPhases = (
 				098FD5C76A9AB2459BE88C53 /* Sources */,
+				6F29ABFDBA6A4078664F0C74 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -130,6 +146,7 @@
 			buildConfigurationList = 0FD46E6C6E54B05AC186E277 /* Build configuration list for PBXNativeTarget "FinderPresets" */;
 			buildPhases = (
 				0664965A0D19DDDEA22788A1 /* Sources */,
+				2DA1BD808BCC28AC5A44875F /* Resources */,
 				A1E8237F66DF0A64BD5BBD9B /* Embed Foundation Extensions */,
 			);
 			buildRules = (
@@ -162,11 +179,12 @@
 				};
 			};
 			buildConfigurationList = F8A5BA3CBAC070E47CB5A195 /* Build configuration list for PBXProject "FinderPresets" */;
-			developmentRegion = en;
+			developmentRegion = ko;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				Base,
 				en,
+				ko,
 			);
 			mainGroup = BD6894501AB8834BED192DE2;
 			minimizedProjectReferenceProxies = 1;
@@ -181,15 +199,36 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		2DA1BD808BCC28AC5A44875F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				53B7D79E8543803A01A98E64 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6F29ABFDBA6A4078664F0C74 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA8F4874E25D0B8D7786DFC2 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		0664965A0D19DDDEA22788A1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDD370CF9DDCD0F260585E97 /* AppSettings.swift in Sources */,
 				BF6C95AEC7AF87D05567A764 /* ContentView.swift in Sources */,
 				D0F87A2EAC43FBD58FDEAF2C /* FinderPresetsApp.swift in Sources */,
 				4314C9699382A3A9896703B5 /* FinderScript.swift in Sources */,
 				9FD320C86B6BBA09EB63EE72 /* Preset.swift in Sources */,
+				F509EFFE331E496A6EF9BDAA /* RequestHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,6 +236,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9640349E95BF7FF79793891 /* AppSettings.swift in Sources */,
 				BB89CC527A28C148AA04FC73 /* FinderScript.swift in Sources */,
 				FDD58650301BDF86C400F52F /* FinderSync.swift in Sources */,
 				268FC23AFC9B629470FDA635 /* Preset.swift in Sources */,
@@ -212,6 +252,27 @@
 			targetProxy = B66B3C7AB35CDF33A1E7DD3B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		310CC46DC2F79984496657EE /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				34AFE1A6666A61618562539D /* en */,
+				F2EA049EB401CDE95E339282 /* ko */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		BBC52EFF6FAA90AA0E88BD1B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CA3F4A1411951C577ED9FD2D /* en */,
+				D101B64FD1996D9D0ED406FE /* ko */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		13BABF8726E505E0D5D5FC3C /* Release */ = {
@@ -266,7 +327,7 @@
 				CODE_SIGN_IDENTITY = "Finder Presets Self-Signed";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -286,7 +347,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -382,7 +443,7 @@
 				CODE_SIGN_IDENTITY = "Finder Presets Self-Signed";
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -396,7 +457,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -7,6 +7,7 @@ struct ContentView: View {
     @State private var extensionEnabled = FIFinderSyncController.isExtensionEnabled
     @State private var busy = false
     @State private var errorMessage: String?
+    @Environment(\.openWindow) private var openWindow
 
     var body: some View {
         NavigationSplitView {
@@ -16,15 +17,15 @@ struct ContentView: View {
             }
             .safeAreaInset(edge: .bottom) {
                 HStack {
-                    Button("추가", systemImage: "plus") {
-                        let preset = Preset(name: "새 프리셋")
+                    Button(L("추가", "Add"), systemImage: "plus") {
+                        let preset = Preset(name: L("새 프리셋", "New Preset"))
                         presets.append(preset)
                         selection = preset.id
                     }
-                    Button("현재 Finder 창에서 새 프리셋", systemImage: "square.and.arrow.down.on.square") { readNew() }
-                        .help("맨 앞 Finder 창의 보기 설정으로 새 프리셋을 만듭니다")
+                    Button(L("현재 Finder 창에서 새 프리셋", "New Preset from Current Finder Window"), systemImage: "square.and.arrow.down.on.square") { readNew() }
+                        .help(L("맨 앞 Finder 창의 보기 설정으로 새 프리셋을 만듭니다", "Creates a new preset from the frontmost Finder window's view settings"))
                         .disabled(busy)
-                    Button("삭제", systemImage: "minus") {
+                    Button(L("삭제", "Delete"), systemImage: "minus") {
                         presets.removeAll { $0.id == selection }
                         selection = nil
                     }
@@ -40,9 +41,9 @@ struct ContentView: View {
             VStack(spacing: 0) {
                 if !extensionEnabled {
                     HStack {
-                        Text("Finder 확장이 꺼져 있어 우클릭 메뉴에 나타나지 않습니다.")
+                        Text(L("Finder 확장이 꺼져 있어 우클릭 메뉴에 나타나지 않습니다.", "The Finder extension is off, so it doesn't appear in the right-click menu."))
                         Spacer()
-                        Button("확장 켜기") { FIFinderSyncController.showExtensionManagementInterface() }
+                        Button(L("확장 켜기", "Turn On Extension")) { FIFinderSyncController.showExtensionManagementInterface() }
                     }
                     .padding(10)
                     .background(.yellow.opacity(0.2))
@@ -50,25 +51,30 @@ struct ContentView: View {
                 if let i = presets.firstIndex(where: { $0.id == selection }) {
                     PresetEditor(preset: $presets[i])
                         .toolbar {
-                            Button("현재 창에서 가져오기", systemImage: "square.and.arrow.down") { read(into: i) }
-                                .help("맨 앞 Finder 창의 보기 설정을 이 프리셋에 덮어씁니다")
-                            Button("현재 창에 적용", systemImage: "play") { apply(presets[i]) }
-                                .help("맨 앞 Finder 창에 이 프리셋을 적용합니다")
+                            Button(L("현재 창에서 가져오기", "Import from Current Window"), systemImage: "square.and.arrow.down") { read(into: i) }
+                                .help(L("맨 앞 Finder 창의 보기 설정을 이 프리셋에 덮어씁니다", "Overwrites this preset with the frontmost Finder window's view settings"))
+                            Button(L("현재 창에 적용", "Apply to Current Window"), systemImage: "play") { apply(presets[i]) }
+                                .help(L("맨 앞 Finder 창에 이 프리셋을 적용합니다", "Applies this preset to the frontmost Finder window"))
                         }
                         .disabled(busy)
                 } else {
-                    ContentUnavailableView("프리셋을 선택해 편집", systemImage: "folder")
+                    ContentUnavailableView(L("프리셋을 선택해 편집", "Select a Preset to Edit"), systemImage: "folder")
                 }
             }
         }
         .onChange(of: presets) { PresetStore.save(presets) }
+        .onAppear { AppDelegate.openMainWindow = { openWindow(id: "main") } }
+        // 우클릭으로 저장한 프리셋을 목록에 바로 반영한다
+        .onReceive(NotificationCenter.default.publisher(for: .presetsChanged)) { _ in
+            presets = PresetStore.load()
+        }
         .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
             extensionEnabled = FIFinderSyncController.isExtensionEnabled
             // Finder 확장이 우클릭으로 저장한 프리셋을 덮어쓰지 않도록 다시 읽는다
             presets = PresetStore.load()
         }
-        .alert("Finder 오류", isPresented: .constant(errorMessage != nil)) {
-            Button("확인") { errorMessage = nil }
+        .alert(L("Finder 오류", "Finder Error"), isPresented: .constant(errorMessage != nil)) {
+            Button(L("확인", "OK")) { errorMessage = nil }
         } message: {
             Text(errorMessage ?? "")
         }
@@ -124,19 +130,19 @@ struct PresetEditor: View {
 
     var body: some View {
         Form {
-            Section("기본") {
-                TextField("이름", text: $preset.name)
-                Picker("보기 방식", selection: $preset.viewStyle) {
+            Section(L("기본", "General")) {
+                TextField(L("이름", "Name"), text: $preset.name)
+                Picker(L("보기 방식", "View Style"), selection: $preset.viewStyle) {
                     ForEach(ViewStyle.allCases) { Text($0.title).tag($0) }
                 }
-                Picker("정렬 기준", selection: $preset.sortKey) {
+                Picker(L("정렬 기준", "Sort By"), selection: $preset.sortKey) {
                     ForEach(SortKey.allCases) { Text($0.title).tag($0) }
                 }
-                .help("정렬 방향은 Finder 기본값을 따릅니다. 없음·자동 격자 정렬은 아이콘 보기에서만 적용됩니다.")
+                .help(L("정렬 방향은 Finder 기본값을 따릅니다. 없음·자동 격자 정렬은 아이콘 보기에서만 적용됩니다.", "Sort direction follows Finder's default. None and Snap to Grid apply only in icon view."))
             }
 
-            Section("아이콘 보기") {
-                LabeledContent("아이콘 크기") {
+            Section(L("아이콘 보기", "Icon View")) {
+                LabeledContent(L("아이콘 크기", "Icon Size")) {
                     HStack {
                         Slider(value: Binding(get: { Double(preset.iconSize) }, set: { preset.iconSize = Int($0) }),
                                in: 16...512, step: 4)
@@ -144,39 +150,39 @@ struct PresetEditor: View {
                     }
                 }
                 textSizePicker($preset.iconTextSize)
-                Picker("레이블 위치", selection: $preset.labelOnRight) {
-                    Text("아래").tag(false)
-                    Text("오른쪽").tag(true)
+                Picker(L("레이블 위치", "Label Position"), selection: $preset.labelOnRight) {
+                    Text(L("아래", "Bottom")).tag(false)
+                    Text(L("오른쪽", "Right")).tag(true)
                 }
                 .pickerStyle(.segmented)
-                Toggle("항목 정보 보기", isOn: $preset.showsItemInfo)
-                Toggle("아이콘 미리보기 보기", isOn: $preset.showsIconPreview)
+                Toggle(L("항목 정보 보기", "Show Item Info"), isOn: $preset.showsItemInfo)
+                Toggle(L("아이콘 미리보기 보기", "Show Icon Preview"), isOn: $preset.showsIconPreview)
             }
 
-            Section("목록 보기") {
-                Picker("아이콘 크기", selection: $preset.listLargeIcons) {
-                    Text("작게").tag(false)
-                    Text("크게").tag(true)
+            Section(L("목록 보기", "List View")) {
+                Picker(L("아이콘 크기", "Icon Size"), selection: $preset.listLargeIcons) {
+                    Text(L("작게", "Small")).tag(false)
+                    Text(L("크게", "Large")).tag(true)
                 }
                 .pickerStyle(.segmented)
                 textSizePicker($preset.listTextSize)
-                Toggle("상대적 날짜 사용", isOn: $preset.usesRelativeDates)
-                Toggle("모든 크기 계산", isOn: $preset.calculatesFolderSizes)
-                Toggle("아이콘 미리보기 보기", isOn: $preset.listShowsIconPreview)
+                Toggle(L("상대적 날짜 사용", "Use Relative Dates"), isOn: $preset.usesRelativeDates)
+                Toggle(L("모든 크기 계산", "Calculate All Sizes"), isOn: $preset.calculatesFolderSizes)
+                Toggle(L("아이콘 미리보기 보기", "Show Icon Preview"), isOn: $preset.listShowsIconPreview)
             }
 
-            Section("계층 보기") {
+            Section(L("계층 보기", "Column View")) {
                 textSizePicker($preset.columnTextSize)
-                Toggle("아이콘 보기", isOn: $preset.columnShowsIcon)
-                Toggle("아이콘 미리보기 보기", isOn: $preset.columnShowsIconPreview)
-                Toggle("미리보기 열 보기", isOn: $preset.showsPreviewColumn)
+                Toggle(L("아이콘 보기", "Show Icons"), isOn: $preset.columnShowsIcon)
+                Toggle(L("아이콘 미리보기 보기", "Show Icon Preview"), isOn: $preset.columnShowsIconPreview)
+                Toggle(L("미리보기 열 보기", "Show Preview Column"), isOn: $preset.showsPreviewColumn)
             }
         }
         .formStyle(.grouped)
     }
 
     private func textSizePicker(_ value: Binding<Int>) -> some View {
-        Picker("텍스트 크기", selection: value) {
+        Picker(L("텍스트 크기", "Text Size"), selection: value) {
             ForEach(textSizes, id: \.self) { Text("\($0)").tag($0) }
         }
     }

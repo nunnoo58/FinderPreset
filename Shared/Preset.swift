@@ -6,10 +6,10 @@ enum ViewStyle: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .icon: "아이콘"
-        case .list: "목록"
-        case .column: "계층"
-        case .gallery: "갤러리"
+        case .icon: L("아이콘", "Icons")
+        case .list: L("목록", "List")
+        case .column: L("계층", "Columns")
+        case .gallery: L("갤러리", "Gallery")
         }
     }
 
@@ -30,8 +30,12 @@ enum SortKey: String, Codable, CaseIterable, Identifiable {
     case none, snapToGrid, name, kind, lastOpened, dateAdded, modificationDate, creationDate, size, label
     var id: Self { self }
 
-    // Finder 메뉴 항목 이름과 같아야 한다
-    var title: String {
+    var title: String { L(koreanName, englishName) }
+
+    // Finder 메뉴와 보기 옵션의 열 체크박스 이름. macOS 언어가 한국어나 영어일 때 찾을 수 있다.
+    var menuNames: [String] { [koreanName, englishName] }
+
+    private var koreanName: String {
         switch self {
         case .none: "없음"
         case .snapToGrid: "자동 격자 정렬"
@@ -43,6 +47,21 @@ enum SortKey: String, Codable, CaseIterable, Identifiable {
         case .creationDate: "생성일"
         case .size: "크기"
         case .label: "태그"
+        }
+    }
+
+    private var englishName: String {
+        switch self {
+        case .none: "None"
+        case .snapToGrid: "Snap to Grid"
+        case .name: "Name"
+        case .kind: "Kind"
+        case .lastOpened: "Date Last Opened"
+        case .dateAdded: "Date Added"
+        case .modificationDate: "Date Modified"
+        case .creationDate: "Date Created"
+        case .size: "Size"
+        case .label: "Tags"
         }
     }
 
@@ -75,19 +94,24 @@ struct Preset: Codable, Identifiable, Hashable {
     var columnShowsIconPreview = true
     var showsPreviewColumn = true
 
-    static let defaults: [Preset] = [
-        Preset(name: "목록 · 이름순"),
-        Preset(name: "목록 · 최근 수정순", sortKey: .modificationDate),
-        Preset(name: "큰 아이콘", viewStyle: .icon, sortKey: .kind, iconSize: 128, iconTextSize: 13),
-    ]
+    // 프리셋 파일이 없을 때 그 시점의 언어로 만든다
+    static var defaults: [Preset] {
+        [
+            Preset(name: L("목록 · 이름순", "List · By Name")),
+            Preset(name: L("목록 · 최근 수정순", "List · Recently Modified"), sortKey: .modificationDate),
+            Preset(name: L("큰 아이콘", "Large Icons"), viewStyle: .icon, sortKey: .kind, iconSize: 128, iconTextSize: 13),
+        ]
+    }
 }
 
 enum PresetStore {
     // 샌드박스 안에서는 홈이 컨테이너로 바뀌므로 실제 홈 경로를 쓴다. 엔타이틀먼트의 경로 예외와 맞춰야 한다.
-    static var fileURL: URL {
+    static var folderURL: URL {
         let home = String(cString: getpwuid(getuid()).pointee.pw_dir)
-        return URL(fileURLWithPath: home).appendingPathComponent("Library/Application Support/FinderPresets/presets.json")
+        return URL(fileURLWithPath: home).appendingPathComponent("Library/Application Support/FinderPresets")
     }
+
+    static var fileURL: URL { folderURL.appendingPathComponent("presets.json") }
 
     static func load() -> [Preset] {
         guard let data = try? Data(contentsOf: fileURL),

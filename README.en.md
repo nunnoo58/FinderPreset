@@ -79,10 +79,10 @@ If the top of the app window says "The Finder extension is off, so it doesn't ap
 
 ### 4. Allow permissions
 
-Prompts appear the first time you apply a preset. Allow all of them. Only the app (FinderPresets) needs permissions.
+Only the app (FinderPresets) needs permissions.
 
-- **Automation**: "FinderPresets" wants to control Finder and System Events → Allow
-- **Device Control and Data Access**: Turn on "FinderPresets" in System Settings → Privacy & Security → Device Control and Data Access. On macOS 26 and earlier this is called **Accessibility**.
+- **Automation**: The first time you apply a preset, a prompt says "FinderPresets" wants to control Finder and System Events → Allow
+- **Device Control and Data Access**: A prompt may not appear, so turn on "FinderPresets" yourself in System Settings → Privacy & Security → Device Control and Data Access. On macOS 26 and earlier this is called **Accessibility**. If it is off, the app tells you where to turn it on when you apply a preset.
 
 ### Notes
 
@@ -130,7 +130,7 @@ Prompts appear the first time you apply a preset. Allow all of them. Only the ap
 
 ## Testing
 
-Results checked on a MacBook Pro 14 (M5, macOS 27.2, v1.0–1.1). Applying and reading settings were checked by running the same code as the app from the command line, and the right-click menu was checked by actually clicking it.
+Results checked on a MacBook Pro 14 (M5, macOS 27.2) with v1.0–1.1 and later development builds. Applying and reading settings were checked by running the same code as the app from the command line, and the right-click menu and app buttons were checked by actually clicking them.
 
 ### Done
 
@@ -147,11 +147,18 @@ Results checked on a MacBook Pro 14 (M5, macOS 27.2, v1.0–1.1). Applying and r
 - [x] Changing the language in Settings shows the app window and right-click menu in that language only; the menu bar changes after reopening the app (v1.1)
 - [x] With the app closed, choosing a preset from the right-click menu launches the app, applies the preset, and quits (v1.1)
 - [x] "Save Current View as Preset…" in the right-click menu brings the name prompt to the front, and the saved preset appears in the app's list immediately (v1.1)
-
-### Not yet tested
-
-- [ ] Confirmation when there are more than 20 subfolders
-- [ ] "New Preset from Current Finder Window" button in the app
+- [x] When applying or saving from the right-click menu, the app's main window does not appear; only the needed dialog does (after v1.1)
+- [x] "Edit Presets…" in the right-click menu opens the app window even when the app is closed (after v1.1)
+- [x] "Apply to Subfolders" in the right-click menu applies to the folder and all 3 subfolders, and the app quits when done (after v1.1)
+- [x] With more than 20 targets including subfolders, an "Apply to 22 folders?" confirmation appears, and nothing is applied if you cancel (after v1.1)
+- [x] Right-clicking a file applies only to its containing folder; selecting two folders and right-clicking applies only to those two (after v1.1)
+- [x] "New Preset from Current Finder Window", "Apply to Current Window", and "Import from Current Window" in the app work on the frontmost Finder window (after v1.1)
+- [x] Gallery view presets and sorting in folders with "Use Groups" on ("Sort Groups By") are applied (after v1.1)
+- [x] When a permission is missing, a notice tells you where to turn it on (after v1.1)
+- [x] With the language set to English, the confirmation and permission notices are shown only in English without being cut off (after v1.1)
+- [x] With the app closed, saving with "Save Current View as Preset…" in the right-click menu saves the preset and the app quits (after v1.1)
+- [x] With the app window open, applying or saving from the right-click menu keeps the window open and the app running (after v1.1)
+- [x] With only the app window closed, "Edit Presets…" makes the running app show its window again (after v1.1)
 
 ## License and disclaimer
 

@@ -4,6 +4,13 @@
 
 The app for each version is available on the [Releases](https://github.com/nunnoo58/FinderPreset/releases) page.
 
+## v1.1.1 (2026-11-17)
+
+- Fixed the app window briefly appearing or staying open when applying or saving from the right-click menu while the app is closed
+- Fixed "Edit Presets…" in the right-click menu not opening the app window
+- Reopening the app from the Dock or "Edit Presets…" while it is handling a request now shows the window, and the app no longer quits when done
+- Removed the icon in front of "View Presets" in the right-click menu
+
 ## v1.1 (2026-11-16)
 
 - Added support for English macOS

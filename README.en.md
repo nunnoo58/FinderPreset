@@ -11,13 +11,12 @@ A macOS app that saves Finder folder view settings as presets and applies them s
 - Tested on: MacBook Pro 14 (M5, macOS 27.2)
 - The app is not notarized by Apple, so a warning appears on first launch. See [First launch](#2-first-launch).
 
-## Latest version: v1.1
+## Latest version: v1.1.1
 
-- Added support for English macOS
-- Added an app language setting (Settings → Language: System Default, 한국어, English)
-- Finder is now controlled by the app itself. Only the app needs permissions; the Finder extension needs none
-- When saving the current view from the right-click menu, the name prompt comes to the front so you can type right away, and the saved preset appears in the app's list immediately
-- When a permission is missing, the app tells you which setting to turn on (including "Device Control and Data Access" on macOS 27)
+- Fixed the app window briefly appearing or staying open when applying or saving from the right-click menu while the app is closed
+- Fixed "Edit Presets…" in the right-click menu not opening the app window
+- Reopening the app from the Dock or "Edit Presets…" while it is handling a request now shows the window, and the app no longer quits when done
+- Removed the icon in front of "View Presets" in the right-click menu
 
 See [CHANGELOG.en.md](CHANGELOG.en.md) for earlier versions, and get the app from the [latest release](https://github.com/nunnoo58/FinderPreset/releases/latest).
 
@@ -130,7 +129,7 @@ Only the app (FinderPresets) needs permissions.
 
 ## Testing
 
-Results checked on a MacBook Pro 14 (M5, macOS 27.2) with v1.0–1.1 and later development builds. Applying and reading settings were checked by running the same code as the app from the command line, and the right-click menu and app buttons were checked by actually clicking them.
+Results checked on a MacBook Pro 14 (M5, macOS 27.2) with v1.0–1.1.1. Applying and reading settings were checked by running the same code as the app from the command line, and the right-click menu and app buttons were checked by actually clicking them.
 
 ### Done
 
@@ -147,18 +146,18 @@ Results checked on a MacBook Pro 14 (M5, macOS 27.2) with v1.0–1.1 and later d
 - [x] Changing the language in Settings shows the app window and right-click menu in that language only; the menu bar changes after reopening the app (v1.1)
 - [x] With the app closed, choosing a preset from the right-click menu launches the app, applies the preset, and quits (v1.1)
 - [x] "Save Current View as Preset…" in the right-click menu brings the name prompt to the front, and the saved preset appears in the app's list immediately (v1.1)
-- [x] When applying or saving from the right-click menu, the app's main window does not appear; only the needed dialog does (after v1.1)
-- [x] "Edit Presets…" in the right-click menu opens the app window even when the app is closed (after v1.1)
-- [x] "Apply to Subfolders" in the right-click menu applies to the folder and all 3 subfolders, and the app quits when done (after v1.1)
-- [x] With more than 20 targets including subfolders, an "Apply to 22 folders?" confirmation appears, and nothing is applied if you cancel (after v1.1)
-- [x] Right-clicking a file applies only to its containing folder; selecting two folders and right-clicking applies only to those two (after v1.1)
-- [x] "New Preset from Current Finder Window", "Apply to Current Window", and "Import from Current Window" in the app work on the frontmost Finder window (after v1.1)
-- [x] Gallery view presets and sorting in folders with "Use Groups" on ("Sort Groups By") are applied (after v1.1)
-- [x] When a permission is missing, a notice tells you where to turn it on (after v1.1)
-- [x] With the language set to English, the confirmation and permission notices are shown only in English without being cut off (after v1.1)
-- [x] With the app closed, saving with "Save Current View as Preset…" in the right-click menu saves the preset and the app quits (after v1.1)
-- [x] With the app window open, applying or saving from the right-click menu keeps the window open and the app running (after v1.1)
-- [x] With only the app window closed, "Edit Presets…" makes the running app show its window again (after v1.1)
+- [x] When applying or saving from the right-click menu, the app's main window does not appear; only the needed dialog does (v1.1.1)
+- [x] "Edit Presets…" in the right-click menu opens the app window even when the app is closed (v1.1.1)
+- [x] "Apply to Subfolders" in the right-click menu applies to the folder and all 3 subfolders, and the app quits when done (v1.1.1)
+- [x] With more than 20 targets including subfolders, an "Apply to 22 folders?" confirmation appears, and nothing is applied if you cancel (v1.1.1)
+- [x] Right-clicking a file applies only to its containing folder; selecting two folders and right-clicking applies only to those two (v1.1.1)
+- [x] "New Preset from Current Finder Window", "Apply to Current Window", and "Import from Current Window" in the app work on the frontmost Finder window (v1.1.1)
+- [x] Gallery view presets and sorting in folders with "Use Groups" on ("Sort Groups By") are applied (v1.1.1)
+- [x] When a permission is missing, a notice tells you where to turn it on (v1.1.1)
+- [x] With the language set to English, the confirmation and permission notices are shown only in English without being cut off (v1.1.1)
+- [x] With the app closed, saving with "Save Current View as Preset…" in the right-click menu saves the preset and the app quits (v1.1.1)
+- [x] With the app window open, applying or saving from the right-click menu keeps the window open and the app running (v1.1.1)
+- [x] With only the app window closed, "Edit Presets…" makes the running app show its window again (v1.1.1)
 
 ## License and disclaimer
 

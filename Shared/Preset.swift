@@ -94,6 +94,11 @@ struct Preset: Codable, Identifiable, Hashable {
     var columnShowsIconPreview = true
     var showsPreviewColumn = true
 
+    /// 아이콘 크기는 16, 32, 64 … 512만 쓴다. Finder에서 읽은 값이나 예전 프리셋 값은 가장 가까운 단계로 맞춘다.
+    static func snappedIconSize(_ size: Int) -> Int {
+        min(max(Int(pow(2, log2(Double(max(size, 1))).rounded())), 16), 512)
+    }
+
     // 프리셋 파일이 없을 때 그 시점의 언어로 만든다
     static var defaults: [Preset] {
         [
@@ -117,7 +122,7 @@ enum PresetStore {
         guard let data = try? Data(contentsOf: fileURL),
               let presets = try? JSONDecoder().decode([Preset].self, from: data)
         else { return Preset.defaults }
-        return presets
+        return presets.map { var p = $0; p.iconSize = Preset.snappedIconSize(p.iconSize); return p }
     }
 
     static func save(_ presets: [Preset]) {

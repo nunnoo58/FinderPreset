@@ -11,12 +11,10 @@ A macOS app that saves Finder folder view settings as presets and applies them s
 - Tested on: MacBook Pro 14 (M5, macOS 27.2)
 - The app is not notarized by Apple, so a warning appears on first launch. See [First launch](#2-first-launch).
 
-## Latest version: v1.1.1
+## Latest version: v1.2.0
 
-- Fixed the app window briefly appearing or staying open when applying or saving from the right-click menu while the app is closed
-- Fixed "Edit Presets…" in the right-click menu not opening the app window
-- Reopening the app from the Dock or "Edit Presets…" while it is handling a request now shows the window, and the app no longer quits when done
-- Removed the icon in front of "View Presets" in the right-click menu
+- Icon size is now chosen from 16, 32, 64, 128, 256, and 512 (the slider shows 6 tick marks)
+- Icon sizes imported from the current view and in existing presets are rounded to the nearest step
 
 See [CHANGELOG.en.md](CHANGELOG.en.md) for earlier versions, and get the app from the [latest release](https://github.com/nunnoo58/FinderPreset/releases/latest).
 

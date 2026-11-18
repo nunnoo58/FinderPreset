@@ -31,7 +31,7 @@ enum FinderScript {
         var p = Preset(name: string(1))
         p.viewStyle = ViewStyle(rawValue: string(2)) ?? p.viewStyle
         p.sortKey = SortKey.allCases.first { $0.menuNames.contains(string(3)) } ?? p.sortKey
-        p.iconSize = int(4)
+        p.iconSize = Preset.snappedIconSize(int(4))
         p.iconTextSize = int(5)
         p.labelOnRight = bool(6)
         p.showsItemInfo = bool(7)

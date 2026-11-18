@@ -4,6 +4,11 @@
 
 The app for each version is available on the [Releases](https://github.com/nunnoo58/FinderPreset/releases) page.
 
+## v1.2.0 (2026-11-18)
+
+- Icon size is now chosen from 16, 32, 64, 128, 256, and 512 (the slider shows 6 tick marks)
+- Icon sizes imported from the current view and in existing presets are rounded to the nearest step
+
 ## v1.1.1 (2026-11-17)
 
 - Fixed the app window briefly appearing or staying open when applying or saving from the right-click menu while the app is closed

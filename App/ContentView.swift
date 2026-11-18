@@ -149,8 +149,9 @@ struct PresetEditor: View {
             Section(L("아이콘 보기", "Icon View")) {
                 LabeledContent(L("아이콘 크기", "Icon Size")) {
                     HStack {
-                        Slider(value: Binding(get: { Double(preset.iconSize) }, set: { preset.iconSize = Int($0) }),
-                               in: 16...512, step: 4)
+                        // 16, 32, 64 … 512로 2배씩 커지도록 지수(2⁴~2⁹)를 움직인다
+                        Slider(value: Binding(get: { log2(Double(preset.iconSize)) }, set: { preset.iconSize = Int(pow(2, $0.rounded())) }),
+                               in: 4...9, step: 1)
                         Text("\(preset.iconSize)×\(preset.iconSize)").monospacedDigit().frame(width: 80, alignment: .trailing)
                     }
                 }

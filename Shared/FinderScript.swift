@@ -98,7 +98,17 @@ enum FinderScript {
 
     // MARK: - 스크립트
 
-    private static let frontTarget = "tell application \"Finder\" to set t to (target of Finder window 1) as alias"
+    // 창이 없거나 최근 항목처럼 폴더가 아닌 곳을 보여 주면 AppleScript 원문 대신 이유를 알려 준다
+    private static var frontTarget: String { """
+    tell application "Finder"
+        if (count Finder windows) is 0 then error "\(L("열린 Finder 창이 없습니다. 폴더를 Finder 창으로 연 뒤 다시 시도해 주세요.", "No Finder window is open. Open a folder in a Finder window and try again."))"
+        try
+            set t to (target of Finder window 1) as alias
+        on error
+            error "\(L("맨 앞 Finder 창이 폴더를 보여 주고 있지 않습니다. 최근 항목, AirDrop 같은 곳이 아닌 폴더를 열어 주세요.", "The frontmost Finder window isn't showing a folder. Open a folder instead of a location like Recents or AirDrop."))"
+        end try
+    end tell
+    """ }
 
     // 오류 문구가 그때의 앱 언어를 따르도록 매번 만든다
     private static var helpers: String { """

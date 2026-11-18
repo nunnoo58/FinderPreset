@@ -4,6 +4,11 @@
 
 The app for each version is available on the [Releases](https://github.com/nunnoo58/FinderPreset/releases) page.
 
+## v1.2.1 (2026-11-18)
+
+- Changed the error message to explain the reason when no Finder window is open or the frontmost window isn't showing a folder
+- Moved the "New Preset from Current Finder Window" button in the sidebar to the right of the Delete (−) button
+
 ## v1.2.0 (2026-11-18)
 
 - Icon size is now chosen from 16, 32, 64, 128, 256, and 512 (the slider shows 6 tick marks)

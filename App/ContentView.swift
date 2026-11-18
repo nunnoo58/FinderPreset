@@ -22,14 +22,14 @@ struct ContentView: View {
                         presets.append(preset)
                         selection = preset.id
                     }
-                    Button(L("현재 Finder 창에서 새 프리셋", "New Preset from Current Finder Window"), systemImage: "square.and.arrow.down.on.square") { readNew() }
-                        .help(L("맨 앞 Finder 창의 보기 설정으로 새 프리셋을 만듭니다", "Creates a new preset from the frontmost Finder window's view settings"))
-                        .disabled(busy)
                     Button(L("삭제", "Delete"), systemImage: "minus") {
                         presets.removeAll { $0.id == selection }
                         selection = nil
                     }
                     .disabled(selection == nil)
+                    Button(L("현재 Finder 창에서 새 프리셋", "New Preset from Current Finder Window"), systemImage: "square.and.arrow.down.on.square") { readNew() }
+                        .help(L("맨 앞 Finder 창의 보기 설정으로 새 프리셋을 만듭니다", "Creates a new preset from the frontmost Finder window's view settings"))
+                        .disabled(busy)
                     Spacer()
                 }
                 .labelStyle(.iconOnly)

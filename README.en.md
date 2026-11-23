@@ -11,10 +11,9 @@ A macOS app that saves Finder folder view settings as presets and applies them s
 - Tested on: MacBook Pro 14 (M5, macOS 27.2)
 - The app is not notarized by Apple, so a warning appears on first launch. See [First launch](#2-first-launch).
 
-## Latest version: v1.2.1
+## Latest version: v1.3.0
 
-- Changed the error message to explain the reason when no Finder window is open or the frontmost window isn't showing a folder
-- Moved the "New Preset from Current Finder Window" button in the sidebar to the right of the Delete (−) button
+- Added "Match Parent Folder" to the right-click menu, which makes the folder's view settings the same as its parent folder's
 
 See [CHANGELOG.en.md](CHANGELOG.en.md) for earlier versions, and get the app from the [latest release](https://github.com/nunnoo58/FinderPreset/releases/latest).
 
@@ -98,12 +97,14 @@ Only the app (FinderPresets) needs permissions.
 | Apply to the folder you are viewing | Right-click empty space in the window → View Presets → choose a preset |
 | Apply to a specific folder | Right-click the folder → View Presets → choose a preset |
 | Apply to subfolders too | Right-click → View Presets → Apply to Subfolders → choose a preset |
+| Match the parent folder | Right-click → View Presets → Match Parent Folder |
 | Save the current view | Right-click → View Presets → Save Current View as Preset… |
 | Edit presets | Right-click → View Presets → Edit Presets…, or open the app |
 
 - Right-clicking a file applies the preset to the folder that contains it.
 - When you choose an item from the right-click menu, the app launches without a window, applies the preset, and quits when done.
 - Applying to subfolders copies the settings once to the subfolders that exist at that moment. Folders created later and later changes to the parent are not followed. If there are more than 20 targets, a confirmation appears first.
+- Match Parent Folder reads the parent folder's view settings and applies them to the folder as they are. Nothing is saved to the preset list.
 - In the app, "Apply to Current Window", "Import from Current Window", and "New Preset from Current Finder Window" work on the frontmost Finder window.
 
 ## How it works
@@ -127,7 +128,7 @@ Only the app (FinderPresets) needs permissions.
 
 ## Testing
 
-Results checked on a MacBook Pro 14 (M5, macOS 27.2) with v1.0–1.1.1. Applying and reading settings were checked by running the same code as the app from the command line, and the right-click menu and app buttons were checked by actually clicking them.
+Results checked on a MacBook Pro 14 (M5, macOS 27.2) with v1.0–1.3.0. Applying and reading settings were checked by running the same code as the app from the command line, and the right-click menu and app buttons were checked by actually clicking them.
 
 ### Done
 
@@ -156,6 +157,7 @@ Results checked on a MacBook Pro 14 (M5, macOS 27.2) with v1.0–1.1.1. Applying
 - [x] With the app closed, saving with "Save Current View as Preset…" in the right-click menu saves the preset and the app quits (v1.1.1)
 - [x] With the app window open, applying or saving from the right-click menu keeps the window open and the app running (v1.1.1)
 - [x] With only the app window closed, "Edit Presets…" makes the running app show its window again (v1.1.1)
+- [x] Right-clicking empty space in a subfolder window in icon view and choosing "Match Parent Folder" changes it to the parent's list view and Date Modified sorting. Targeting a file changes the folder that contains it (v1.3.0)
 
 ## License and disclaimer
 

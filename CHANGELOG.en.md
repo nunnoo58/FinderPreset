@@ -4,6 +4,10 @@
 
 The app for each version is available on the [Releases](https://github.com/nunnoo58/FinderPreset/releases) page.
 
+## v1.3.0 (2026-11-23)
+
+- Added "Match Parent Folder" to the right-click menu, which makes the folder's view settings the same as its parent folder's
+
 ## v1.2.1 (2026-11-18)
 
 - Changed the error message to explain the reason when no Finder window is open or the frontmost window isn't showing a folder

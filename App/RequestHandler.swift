@@ -4,7 +4,7 @@ extension Notification.Name {
     static let presetsChanged = Notification.Name("FinderPresetsChanged")
 }
 
-/// Finder 확장이 보낸 요청(finderpresets://apply, save, edit)을 처리한다.
+/// Finder 확장이 보낸 요청(finderpresets://apply, matchParent, save)을 처리한다.
 /// Finder 조작에 필요한 권한(자동화, 기기 제어 및 데이터 접근)을 앱 하나만 받도록 확장은 요청만 보낸다.
 final class AppDelegate: NSObject, NSApplicationDelegate {
     /// ContentView가 나타날 때 SwiftUI의 openWindow를 넘겨준다
@@ -71,6 +71,22 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                     if targets.count > 20, !Dialogs.confirm(count: targets.count) { return }
                 }
                 if let error = FinderScript.apply(preset, to: targets) { Dialogs.showError(error) }
+            }
+
+        case "matchParent":
+            guard !paths.isEmpty else { return }
+            run {
+                // 파일을 우클릭했으면 그 파일이 든 폴더를 상위 폴더에 맞춘다
+                for path in paths {
+                    switch FinderScript.folderAndParent(of: path).flatMap({ pair in
+                        FinderScript.read(path: pair.parent, snapsIconSize: false).map { (pair.folder, $0) }
+                    }) {
+                    case .success(let (folder, preset)):
+                        if let error = FinderScript.apply(preset, to: [folder]) { return Dialogs.showError(error) }
+                    case .failure(let error):
+                        return Dialogs.showError(error.message)
+                    }
+                }
             }
 
         case "save":

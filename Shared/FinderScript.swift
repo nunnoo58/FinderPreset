@@ -14,8 +14,27 @@ enum FinderScript {
         return run(helpers + applyHandler(preset) + calls.joined(separator: "\n")).error
     }
 
+    /// path(파일이면 그 파일이 든 폴더)와 그 상위 폴더의 경로를 돌려준다. 앱은 샌드박스 안이라 항목 종류를 Finder에 묻는다.
+    static func folderAndParent(of path: String) -> Result<(folder: String, parent: String), ScriptError> {
+        let source = helpers + """
+        set f to folderOf((POSIX file \(quoted(path))) as alias)
+        tell application "Finder"
+            if class of item (f as text) is disk then error "\(L("디스크 맨 위 폴더에는 상위 폴더가 없습니다.", "The top folder of a disk has no parent folder."))"
+            set p to (container of item (f as text)) as alias
+        end tell
+        return {POSIX path of f, POSIX path of p}
+        """
+        let result = run(source)
+        if let error = result.error { return .failure(ScriptError(message: error)) }
+        guard let d = result.descriptor, d.numberOfItems == 2,
+              let folder = d.atIndex(1)?.stringValue, let parent = d.atIndex(2)?.stringValue
+        else { return .failure(ScriptError(message: L("상위 폴더를 찾지 못했습니다.", "Couldn't find the parent folder."))) }
+        return .success((folder, parent))
+    }
+
     /// path 폴더(nil이면 맨 앞 Finder 창)의 보기 설정을 읽어 그 폴더 이름을 붙인 새 프리셋으로 돌려준다.
-    static func read(path: String?) -> Result<Preset, ScriptError> {
+    /// 다른 폴더에 그대로 옮길 때는 snapsIconSize를 끄고 아이콘 크기를 단계에 맞추지 않는다.
+    static func read(path: String?, snapsIconSize: Bool = true) -> Result<Preset, ScriptError> {
         if let error = requireAccessibility() { return .failure(ScriptError(message: error)) }
         let call = path.map { "return readPreset((POSIX file \(quoted($0))) as alias)" }
             ?? frontTarget + "\nreturn readPreset(t)"
@@ -31,7 +50,7 @@ enum FinderScript {
         var p = Preset(name: string(1))
         p.viewStyle = ViewStyle(rawValue: string(2)) ?? p.viewStyle
         p.sortKey = SortKey.allCases.first { $0.menuNames.contains(string(3)) } ?? p.sortKey
-        p.iconSize = Preset.snappedIconSize(int(4))
+        p.iconSize = snapsIconSize ? Preset.snappedIconSize(int(4)) : int(4)
         p.iconTextSize = int(5)
         p.labelOnRight = bool(6)
         p.showsItemInfo = bool(7)

@@ -36,6 +36,7 @@ final class FinderSync: FIFinderSync {
         recursive.submenu = NSMenu()
         presetItems(tagOffset: Self.recursiveTag).forEach(recursive.submenu!.addItem)
         submenu.addItem(recursive)
+        submenu.addItem(NSMenuItem(title: L("상위 폴더와 일치", "Match Parent Folder"), action: #selector(matchParent(_:)), keyEquivalent: ""))
         submenu.addItem(NSMenuItem(title: L("현재 보기를 프리셋으로 저장…", "Save Current View as Preset…"), action: #selector(saveCurrent(_:)), keyEquivalent: ""))
         submenu.addItem(.separator())
         submenu.addItem(NSMenuItem(title: L("프리셋 편집…", "Edit Presets…"), action: #selector(openEditor(_:)), keyEquivalent: ""))
@@ -64,6 +65,12 @@ final class FinderSync: FIFinderSync {
         send("apply", [URLQueryItem(name: "preset", value: presets[index].id.uuidString),
                        URLQueryItem(name: "recursive", value: sender.tag >= Self.recursiveTag ? "1" : "0")]
              + paths.map { URLQueryItem(name: "path", value: $0) })
+    }
+
+    @objc private func matchParent(_ sender: NSMenuItem) {
+        let paths = targetPaths()
+        guard !paths.isEmpty else { return }
+        send("matchParent", paths.map { URLQueryItem(name: "path", value: $0) })
     }
 
     @objc private func saveCurrent(_ sender: NSMenuItem) {
